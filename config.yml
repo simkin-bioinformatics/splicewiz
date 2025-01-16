@@ -4,13 +4,13 @@
 output_folder: splicewiz_output
 
 # choose number of cores to use in analysis
-cores: 30
+cores: 32
 
 ###############################################################################
 #                       build reference variables                             #
 ###############################################################################
-genome_fasta: genomes/dm_bdgp632_3L_only.fa
-genome_gtf: genomes/dm_bdgp632_with_copia.gtf
+genome_fasta: /home/charlie/projects/genomes/dm_bdgp632.fa
+genome_gtf: /home/charlie/projects/genomes/dm_bdgp632_with_copia.gtf
 
 genomeSAindexNbases: 12 # default 14 is too high for drosophila genome size
 ontology_species: Drosophila melanogaster
@@ -18,8 +18,7 @@ ontology_species: Drosophila melanogaster
 ###############################################################################
 #                  alignment and analysis variables                           #
 ###############################################################################
-# fastq files from the experiment should be at the top level of the defined path
-fastq_folder_path: fastqs/C380_CNS
+fastq_folder_path: /home/charlie/projects/fastqs/C380_CNS
 fastq_suffix: .fq.gz # e.g. .fq or .fq.gz
 is_paired: TRUE # TRUE or FALSE
 
