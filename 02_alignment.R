@@ -21,7 +21,7 @@ fastq_files <- findFASTQ(
     sample_path = config$fastq_folder_path, 
     paired = config$is_paired,
     fastq_suffix = config$fastq_suffix,
-    level = 1
+    level = 0
 )
 
 # perform alignent
