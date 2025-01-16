@@ -1,0 +1,16 @@
+name: splicewiz
+channels:
+    - conda-forge
+    - bioconda
+dependencies:
+    - r-base
+    - r-biocmanager
+    - r-this.path
+    - r::r-doubleexpseq
+    - bioconductor-splicewiz
+    - bioconductor-deseq2
+    - bioconductor-limma
+    - bioconductor-edger
+    - bioconductor-go.db
+    - bioconductor-fgsea
+    - bioconductor-rsubread
