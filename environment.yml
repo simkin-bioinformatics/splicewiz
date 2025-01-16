@@ -3,14 +3,12 @@ channels:
     - conda-forge
     - bioconda
 dependencies:
-    - r-base
-    - r-biocmanager
-    - r-this.path
-    - r::r-doubleexpseq
-    - bioconductor-splicewiz
-    - bioconductor-deseq2
-    - bioconductor-limma
-    - bioconductor-edger
-    - bioconductor-go.db
-    - bioconductor-fgsea
-    - bioconductor-rsubread
+    - r-base=4.4.2
+    - r-biocmanager=1.30.25
+    - bioconductor-splicewiz=1.8.0
+    - bioconductor-deseq2=1.46.0
+    - bioconductor-limma==3.62.1
+    - bioconductor-edger=4.4.0
+    - bioconductor-go.db=3.20.0
+    - bioconductor-fgsea=1.32.0
+    - bioconductor-rsubread=2.20.0
