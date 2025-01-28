@@ -1,10 +1,10 @@
 ###############################################################################
 #    choose an output folder (reference folder will be created inside)        #
 ###############################################################################
-ref_path <- "/home/charlie/splicewiz_output/dm_bdgp632"
-cores <- 12
+ref_path <- "/home/charlie/big_data/splicewiz_output/dm_bdgp632"
+cores <- 30
 
-fastq_folder <- "/home/charlie/Dropbox/splicewiz/splicewiz_fastqs/C380_CNS_filtered"
+fastq_folder <- "/home/charlie/Dropbox/splicewiz/splicewiz_fastqs/C57_BWM"
 fastq_suffix <- ".fq.gz" # e.g. .fq or .fq.gz
 is_paired <- TRUE # TRUE or FALSE
 
@@ -18,7 +18,6 @@ library(SpliceWiz)
 library(glue)
 setSWthreads(cores)
 sample <- basename(fastq_folder)
-analysis_path <- file.path(ref_path, "analysis")
 alignment_path <- file.path(ref_path, glue("{sample}_alignment"))
 aligned_bams_path <- file.path(alignment_path, "aligned_bams")
 dir.create(aligned_bams_path, recursive = TRUE, showWarnings = FALSE)
@@ -98,25 +97,20 @@ res_edgeR <- ASE_edgeR(
 ################################################################################
 res_edgeR_filtered <- res_edgeR[res_edgeR$abs_deltaPSI > deltaPSI_cutoff,]
 res_edgeR_searched <- res_edgeR_filtered[grepl(search_term, res_edgeR_filtered$EventName, ignore.case = TRUE)]
-write.csv(res_edgeR_filtered, file.path(analysis_path, glue('{sample}_res_edgeR.csv')))
-write.csv(res_edgeR_searched, file.path(analysis_path, glue('{sample}_res_edgeR_searched.csv')))
-# event = res_edgeR_searched$EventName[1]
-# event
-covfile(se)
-# dataObj <- getCoverageData(se, Event = event, tracks = colnames(se))
-# plotObj <- getPlotObject(dataObj, Event = event)
+write.csv(res_edgeR_filtered, file.path(alignment_path, glue('{sample}_res_edgeR.csv')))
+write.csv(res_edgeR_searched, file.path(alignment_path, glue('{sample}_res_edgeR_searched.csv')))
 for (event in res_edgeR_searched$EventName) {
-    dataObjCopia <- getCoverageData(se, Event=event, tracks = colnames(se))
-    plotObjCopia <- getPlotObject(dataObjCopia, Event = event)
+    dataObj <- getCoverageData(se, Event=event, tracks = colnames(se))
+    plotObj <- getPlotObject(dataObj, Event = event)
     gene = strsplit(event, split = "/")[[1]][1]
     coverage_plot_name <- glue("{sample}_{gene}.pdf")
     pdf(
-        file.path(analysis_path,coverage_plot_name),
+        file.path(alignment_path,coverage_plot_name),
         width=10,
         height=20
     )
     print(plotView(
-        plotObjCopia,
+        plotObj,
         centerByEvent = TRUE, # whether the plot should be centered at the `Event`
         trackList = list(1,2,3,4,5,6),
         plotJunctions = TRUE
