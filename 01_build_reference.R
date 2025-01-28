@@ -1,30 +1,34 @@
-################################################################################
-##                        Build the splicewiz reference                       ##
-################################################################################
+###############################################################################
+#                       build reference variables                             #
+###############################################################################
+output_folder <- "/home/charlie/splicewiz_output"
+cores <- 12
+genome_fasta <- "BDGP6.32_fasta/dm_bdgp632.fa"
+genome_gtf <- "BDGP6.32_annotations/dm_bdgp632_with_copia.gtf"
+ontology_species <- "Drosophila melanogaster"
 
+################################################################################
+##                        Build the SpliceWiz reference                       ##
+################################################################################
 library(SpliceWiz)
-config <- yaml::yaml.load_file("config.yml")
-ref_path = file.path(config$output_folder, gsub(".fa", "", basename(config$genome_fasta)))
-if (!dir.exists(config$output_folder)) {dir.create(config$output_folder)}
-setSWthreads(config$cores)
+setSWthreads(cores)
+dir.create(output_folder, showWarnings = FALSE)
+ref_path <- file.path(output_folder, gsub(".fa", "", basename(genome_fasta)))
 buildRef(
     reference_path = ref_path,
-    fasta = config$genome_fasta, 
-    gtf = config$genome_gtf,
+    fasta = genome_fasta, 
+    gtf = genome_gtf,
     genome_type = "",
-    ontologySpecies = config$ontology_species,
+    ontologySpecies = ontology_species
 )
 
 ################################################################################
 ##                             Build the STAR reference                       ##
 ################################################################################
-library(SpliceWiz)
-config <- yaml::yaml.load_file("config.yml")
-ref_path = file.path(config$output_folder, gsub(".fa", "", basename(config$genome_fasta)))
-setSWthreads(config$cores)
+genomeSAindexNbases <- floor(log2(file.info(genome_fasta)$size)/2-1)
 STAR_buildRef(
     reference_path = ref_path,
-    n_threads = config$cores,
-    additional_args = c("--genomeSAindexNbases", config$genomeSAindexNbases)
+    n_threads = cores,
+    additional_args = c("--genomeSAindexNbases", genomeSAindexNbases)
 )
 
