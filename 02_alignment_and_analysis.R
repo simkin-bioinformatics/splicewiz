@@ -1,10 +1,9 @@
 ###############################################################################
 #    choose an output folder (reference folder will be created inside)        #
 ###############################################################################
-ref_path <- "/home/charlie/big_data/splicewiz_output/dm_bdgp632"
+ref_path <- "splicewiz_output/dm_bdgp632_Y_only"
 cores <- 30
-
-fastq_folder <- "/home/charlie/Dropbox/splicewiz/splicewiz_fastqs/C57_BWM"
+fastq_folder <- "splicewiz_fastqs/C380_CNS_filtered"
 fastq_suffix <- ".fq.gz" # e.g. .fq or .fq.gz
 is_paired <- TRUE # TRUE or FALSE
 
@@ -104,17 +103,17 @@ for (event in res_edgeR_searched$EventName) {
     plotObj <- getPlotObject(dataObj, Event = event)
     gene = strsplit(event, split = "/")[[1]][1]
     coverage_plot_name <- glue("{sample}_{gene}.pdf")
-    pdf(
-        file.path(alignment_path,coverage_plot_name),
-        width=10,
-        height=20
-    )
-    print(plotView(
-        plotObj,
-        centerByEvent = TRUE, # whether the plot should be centered at the `Event`
-        trackList = list(1,2,3,4,5,6),
-        plotJunctions = TRUE
-    ))
-    dev.off()    
+        pdf(
+            file.path(alignment_path,coverage_plot_name),
+            width=10,
+            height=20
+        )
+        try(print(plotView(
+            plotObj,
+            centerByEvent = TRUE, # whether the plot should be centered at the `Event`
+            trackList = list(1,2,3,4,5,6),
+            plotJunctions = TRUE
+        )))
+        dev.off()
 }
 

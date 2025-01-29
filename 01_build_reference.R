@@ -1,10 +1,10 @@
 ###############################################################################
 #                       build reference variables                             #
 ###############################################################################
-output_folder <- "/home/charlie/big_data/splicewiz_output"
+output_folder <- "splicewiz_output"
 cores <- 30
-genome_fasta <- "/home/charlie/big_data/genomes_and_TE/BDGP6.32_fasta/dm_bdgp632_3L_only.fa"
-genome_gtf <- "/home/charlie/big_data/genomes_and_TE/BDGP6.32_annotations/dm_bdgp632_with_copia.gtf"
+genome_fasta <- "/media/alfred/basic_file_syste/charlie/genomes_and_TE/BDGP6.32_fasta/dm_bdgp632_Y_only.fa"
+genome_gtf <- "/media/alfred/basic_file_syste/charlie/genomes_and_TE/BDGP6.32_annotations/dm_bdgp632_with_copia.gtf"
 ontology_species <- "Drosophila melanogaster"
 
 ################################################################################
