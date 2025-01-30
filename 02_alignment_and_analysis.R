@@ -1,9 +1,10 @@
 ###############################################################################
 #    choose an output folder (reference folder will be created inside)        #
 ###############################################################################
-ref_path <- "splicewiz_output/dm_bdgp632_Y_only"
+ref_path <- "output/BDGP6.32.full"
 cores <- 30
-fastq_folder <- "splicewiz_fastqs/C380_CNS_filtered"
+fastq_folder <- "/home/charlie/projects/reference/splicewiz_fastqs/C380_CNS"
+sample_name <- "C380_CNS"
 fastq_suffix <- ".fq.gz" # e.g. .fq or .fq.gz
 is_paired <- TRUE # TRUE or FALSE
 
@@ -96,13 +97,13 @@ res_edgeR <- ASE_edgeR(
 ################################################################################
 res_edgeR_filtered <- res_edgeR[res_edgeR$abs_deltaPSI > deltaPSI_cutoff,]
 res_edgeR_searched <- res_edgeR_filtered[grepl(search_term, res_edgeR_filtered$EventName, ignore.case = TRUE)]
-write.csv(res_edgeR_filtered, file.path(alignment_path, glue('{sample}_res_edgeR.csv')))
-write.csv(res_edgeR_searched, file.path(alignment_path, glue('{sample}_res_edgeR_searched.csv')))
+write.csv(res_edgeR_filtered, file.path(alignment_path, glue('{sample_name}_res_edgeR.csv')))
+write.csv(res_edgeR_searched, file.path(alignment_path, glue('{sample_name}_res_edgeR_searched.csv')))
 for (event in res_edgeR_searched$EventName) {
     dataObj <- getCoverageData(se, Event=event, tracks = colnames(se))
     plotObj <- getPlotObject(dataObj, Event = event)
     gene = strsplit(event, split = "/")[[1]][1]
-    coverage_plot_name <- glue("{sample}_{gene}.pdf")
+    coverage_plot_name <- glue("{basename(ref_path)}_{sample_name}_{gene}.pdf")
         pdf(
             file.path(alignment_path,coverage_plot_name),
             width=10,
