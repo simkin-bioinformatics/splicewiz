@@ -1,6 +1,7 @@
-splicewiz_output
 input_files
 .snakemake
 splicewiz_fastqs
 Log.out
-.vscode/settings.json
+.vscode
+env
+output
