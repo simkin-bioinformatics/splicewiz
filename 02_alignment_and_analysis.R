@@ -1,10 +1,10 @@
 ###############################################################################
 #    choose an output folder (reference folder will be created inside)        #
 ###############################################################################
-ref_path <- "output/BDGP6.32.full"
+ref_path <- "output/BDGP6.46.full"
 cores <- 30
-fastq_folder <- "/home/charlie/projects/reference/splicewiz_fastqs/C380_CNS"
-sample_name <- "C380_CNS"
+fastq_folder <- "/home/charlie/projects/reference/splicewiz_fastqs/C57_BWM"
+sample_name <- "C57_BWM"
 fastq_suffix <- ".fq.gz" # e.g. .fq or .fq.gz
 is_paired <- TRUE # TRUE or FALSE
 
