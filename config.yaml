@@ -1,0 +1,18 @@
+genome_fasta: /home/charlie/projects/reference/genome_fastas/BDGP6.46.Y.fa
+genome_gtf: /home/charlie/projects/reference/genome_annotations/BDGP6.46.full_with_copia.gtf
+output_folder: output
+cores: 8
+
+fastq_folder: /home/charlie/projects/reference/splicewiz_fastqs/C380_CNS_filtered
+is_paired: True
+fastq_suffix: .fq.gz
+samples:
+  - C380_AUB_CNS_rep1
+  - C380_AUB_CNS_rep2
+  - C380_AUB_CNS_rep3
+  - C380_CS_CNS_rep1
+  - C380_CS_CNS_rep2
+  - C380_CS_CNS_rep3
+
+deltaPSI_cutoff: 0.00
+search_term: copia
